@@ -3,12 +3,14 @@ import { lazy } from "react";
 // import Home from "./components/home/Home";
 const Home = lazy(() => import("./components/home/Home"))
 import Layout from "./components/Layout";
+import Login from "./components/signIn/Login";
 
 const App = () => {
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index  element={<Home />}/>
+      <Route path="login" element={<Login />} />
     </Route>
   ))
   
