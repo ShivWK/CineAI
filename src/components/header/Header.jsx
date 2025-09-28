@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Header = ({ showSignIn = true }) => {
   return (
-    <header className='absolute top-0 left-0 w-full bg-transparent h-17 max-lg:px-5 lg:h-24 z-50 flex items-center'>
+    <header className='absolute top-0 left-0 w-full bg-transparent h-17 max-lg:px-3 lg:h-24 z-50 flex items-center'>
       <div className='w-[1200px] mx-auto flex justify-between items-center'>
         <p className='text-[rgb(229,9,20)] font-semibold text-4xl lg:text-5xl'>CineAI</p>
 
@@ -12,4 +12,4 @@ const Header = ({ showSignIn = true }) => {
   )
 }
 
-export default Header
+export default Header;
