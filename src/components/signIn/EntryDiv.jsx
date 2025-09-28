@@ -35,7 +35,7 @@ const EntryDiv = ({
 
     return (
         <div>
-            <div onClick={divClickHandler} className={`Relative h-16 rounded border ${error ? "border-red-500" : "border-gray-400"} w-full p-2 cursor-text`}>
+            <div onClick={divClickHandler} className={`Relative h-16 rounded border ${error ? "border-red-500" : "border-gray-500"} w-full p-2 cursor-text`}>
                 <input
                     ref={InputRef}
                     onFocus={focusHandler}
@@ -46,7 +46,7 @@ const EntryDiv = ({
                     onChange={inputChangeHandler}
                     className="relative -bottom-5 w-full border-none outline-none text-white font-semibold text-lg"
                 ></input>
-                <p className={`relative text-gray-300 font-medium tracking-wide ${move ? "bottom-8" : "text-xl bottom-4.5"} transition-all duration-150 ease-linear`}>{placeholder}</p>
+                <p className={`relative text-gray-400 font-medium tracking-wide ${move ? "bottom-8" : "text-xl bottom-4.5"} transition-all duration-150 ease-linear`}>{placeholder}</p>
             </div>
             {
                 error && (
