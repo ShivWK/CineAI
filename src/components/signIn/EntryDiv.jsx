@@ -15,6 +15,7 @@ const EntryDiv = ({
     const InputRef = useRef(null);
 
     const divClickHandler = () => {
+        console.log(InputRef.current)
         InputRef.current.focus();
     }
 
