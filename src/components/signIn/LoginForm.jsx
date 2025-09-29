@@ -34,7 +34,7 @@ const LoginForm = () => {
     }, [])
 
     return (
-        <form className="bg-black/70 w-full h-[41rem] lg:h-[42rem] overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28">
+        <form className="bg-black/70 w-full h-[39rem] lg:h-[42rem] overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28">
             <h1 className="text-white font-bold text-2xl lg:text-4xl mb-8 lg:mb-10">Sign In</h1>
             <div className="flex flex-col gap-4.5">
                 <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="emailOrPhone" placeholder="Email or mobile number" isSmall={isSmall} type="text" errorMsg="Please enter a valid email or mobile number." />
