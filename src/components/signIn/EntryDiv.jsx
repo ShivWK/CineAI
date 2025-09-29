@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { CircleX } from "lucide-react";
 
 const EntryDiv = ({
@@ -8,11 +8,17 @@ const EntryDiv = ({
     name,
     isSmall,
     type,
-    errorMsg
+    errorMsg,
+    isError
 }) => {
     const [move, setMove] = useState(false);
     const [error, setError] = useState("");
     const InputRef = useRef(null);
+
+    useEffect(() => {
+        if (!isError) return;
+        setError(errorMsg)
+    }, [isError, errorMsg])
 
     const divClickHandler = () => {
         // console.log(InputRef.current)
