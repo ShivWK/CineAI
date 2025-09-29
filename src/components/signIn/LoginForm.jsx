@@ -41,13 +41,13 @@ const LoginForm = () => {
 
                 <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="password" placeholder="Password" isSmall={isSmall} type="password" errorMsg="Your password must contain between 4 and 60 characters." />
 
-                <button type="button" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-2 rounded text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">Sign In</button>
+                <button type="button" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">Sign In</button>
 
                 <span className="font-bold tracking-wider text-gray-300 text-center">OR</span>
 
-                <button type="button" className="text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-2 rounded text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer">Continue with Google</button>
+                <button type="button" className="text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer">Continue with Google</button>
 
-                <span className="text-white font-semibold text-center underline text-lg cursor-pointer hover:text-gray-300 transition-all duration-100 ease-linear">Forgot password?</span>
+                <span className="text-white font-semibold text-center underline lg:text-lg cursor-pointer hover:text-gray-300 transition-all duration-100 ease-linear">Forgot password?</span>
 
                 <p className="flex items-center gap-1 text-lg">
                     <span className="text-gray-300 font-medium">New to CineAi?</span>

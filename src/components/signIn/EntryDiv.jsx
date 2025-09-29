@@ -15,7 +15,8 @@ const EntryDiv = ({
     const InputRef = useRef(null);
 
     const divClickHandler = () => {
-        console.log(InputRef.current)
+        // console.log(InputRef.current)
+        if (move) return;
         InputRef.current.focus();
     }
 
@@ -35,18 +36,18 @@ const EntryDiv = ({
 
     return (
         <div>
-            <div onClick={divClickHandler} className={`Relative h-16 rounded border ${error ? "border-red-500" : "border-gray-500"} w-full p-2 cursor-text`}>
+            <div onClick={divClickHandler} className={`Relative h-14 lg:h-16 rounded border ${error && "border-red-500"} ${ move ? "border-blue-400" : "border-gray-500" } w-full p-2 cursor-text`}>
                 <input
                     ref={InputRef}
                     onFocus={focusHandler}
                     onBlur={blurHandler}
                     type={type}
-                    value={formData.emailOrPhone}
+                    value={formData[name]}
                     name={name}
                     onChange={inputChangeHandler}
-                    className="relative -bottom-5 w-full border-none outline-none text-white font-semibold text-lg"
+                    className="relative -bottom-4.5 lg:-bottom-5 w-full border-none outline-none text-white font-semibold lg:text-lg"
                 ></input>
-                <p className={`relative text-gray-400 font-medium tracking-wide ${move ? "bottom-8" : "text-xl bottom-4.5"} transition-all duration-150 ease-linear`}>{placeholder}</p>
+                <p className={`relative text-gray-400 font-medium tracking-wide ${move ? "bottom-7 lg:bottom-8" : "text-xl lg:bottom-5 bottom-5"} transition-all duration-150 ease-linear select-none`}>{placeholder}</p>
             </div>
             {
                 error && (
