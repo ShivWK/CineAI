@@ -20,8 +20,11 @@ const EntryDiv = ({
         setError(errorMsg)
     }, [isError, errorMsg])
 
+    useEffect(() => {
+        if (!move && formData?.[name].length !== 0) setMove(true)
+    }, [formData?.[name]])
+
     const divClickHandler = () => {
-        // console.log(InputRef.current)
         if (move) return;
         InputRef.current.focus();
     }
@@ -58,7 +61,7 @@ const EntryDiv = ({
             {
                 error && (
                     <p className="text-red-500 text-xs lg:text-sm font-medium tracking-wide mt-2 flex items-center gap-1">
-                        <CircleX size={isSmall ? 18 : 20} />
+                        <CircleX size={isSmall ? 18 : 20} className="shrink-0" />
                         <span>{error}</span>
                     </p>
                 )

@@ -6,9 +6,9 @@ const LoginForm = () => {
     const [isSignUP, setSignUp] = useState(false);
 
     const [formData, setFormData] = useState({
-        emailOrPhone: "",
+        name: "",
+        email: "",
         password: "",
-        userName: "",
     });
 
     const [formError, setFormError] = useState({
@@ -17,14 +17,14 @@ const LoginForm = () => {
             errorMsg: "Please enter a valid name."
         },
 
-        emailOrPhone: {
+        email: {
             error: false,
-            errorMsg: "Please enter a valid email or mobile number."
+            errorMsg: "Please enter a valid email."
         },
 
         password: {
             error: false,
-            errorMsg: "Your password must contain between 4 and 60 characters."
+            errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
         }
     })
 
@@ -62,24 +62,67 @@ const LoginForm = () => {
         })))
     }
 
-    console.log(formError)
+    const submitHandler = (e) => {
+        e.preventDefault();
+        // console.log(formData);
+
+        const VALID_NAME_PATTERN = /^[a-zA-Z' -]{2,50}$/;
+        const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const VALID_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (isSignUP && !VALID_NAME_PATTERN.test(formData.name) ) {
+            setFormError((pre => ({
+                ...pre,
+                name: {
+                    error: true,
+                    errorMsg: "Please enter a valid name between 2 and 50 characters, using only letters, spaces, hyphens, or apostrophes."
+                }
+            })));
+
+            return;
+        }
+
+        if (!VALID_EMAIL_PATTERN.test(formData.email)) {
+            setFormError((pre => ({
+                ...pre,
+                email: {
+                    error: true,
+                    errorMsg: "Please enter a valid email."
+                }
+            })));
+
+            return;
+        }
+
+        if (isSignUP && !VALID_PASSWORD_PATTERN.test(formData.password)) {
+            setFormError((pre => ({
+                ...pre,
+                password: {
+                    error: true,
+                    errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
+                }
+            })));
+
+            return;
+        }
+    }
 
     return (
-        <form className={`bg-black/70 w-full ${isSignUP ? "h-[42rem] lg:h-[44.5rem]" : "h-[38.5rem] lg:h-[41rem]"} overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28`}>
+        <form onSubmit={submitHandler} className={`bg-black/70 w-full ${isSignUP ? "h-[42rem] lg:h-[44.5rem]" : "h-[38.5rem] lg:h-[41rem]"} overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28`}>
             <h1 className="text-white font-bold text-2xl lg:text-4xl mb-8 lg:mb-10">
                 {isSignUP ? "Sign Up" : "Sign In"}
             </h1>
             <div className="flex flex-col gap-4.5">
 
                 {
-                    isSignUP && <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="userName" placeholder="Your name" isSmall={isSmall} type="text" errorMsg={formError.name.errorMsg} isError={formError.name.error} />
+                    isSignUP && <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="name" placeholder="Name" isSmall={isSmall} type="text" errorMsg={formError.name.errorMsg} isError={formError.name.error} />
                 }
 
-                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="emailOrPhone" placeholder="Email or mobile number" isSmall={isSmall} type="text" errorMsg={formError.emailOrPhone.errorMsg} isError={formError.emailOrPhone.error} />
+                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="email" placeholder="Email" isSmall={isSmall} type="text" errorMsg={formError.email.errorMsg} isError={formError.email.error} />
 
                 <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="password" placeholder="Password" isSmall={isSmall} type="password" errorMsg={formError.password.errorMsg} isError={formError.password.error} />
 
-                <button type="button" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">
+                <button type="submit" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">
                     {isSignUP ? "Sign Up" : "Sign In"}
                 </button>
 
