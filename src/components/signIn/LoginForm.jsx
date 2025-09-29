@@ -64,7 +64,6 @@ const LoginForm = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // console.log(formData);
 
         const VALID_NAME_PATTERN = /^[a-zA-Z' -]{2,50}$/;
         const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -108,7 +107,7 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={submitHandler} className={`bg-black/70 w-full ${isSignUP ? "h-[42rem] lg:h-[44.5rem]" : "h-[38.5rem] lg:h-[41rem]"} overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28`}>
+        <form onSubmit={submitHandler} className={`bg-black/70 w-full ${isSignUP ? "h-[42.5rem] lg:h-[46.8rem]" : "h-[39rem] lg:h-[43rem]"} overflow-hidden lg:w-[35%] px-8 lg:px-14 py-8 transition-all duration-200 ease-linear mt-18 lg:mt-28 rounded-md`}>
             <h1 className="text-white font-bold text-2xl lg:text-4xl mb-8 lg:mb-10">
                 {isSignUP ? "Sign Up" : "Sign In"}
             </h1>
