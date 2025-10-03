@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import EntryDiv from "./EntryDiv"
+import EntryDiv from "./EntryDiv";
+import { dataValidator } from "../../utils/dataValidator";
 
 const LoginForm = () => {
     const [isSmall, setSmall] = useState(false);
@@ -65,45 +66,14 @@ const LoginForm = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        const VALID_NAME_PATTERN = /^[a-zA-Z' -]{2,50}$/;
-        const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const VALID_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        dataValidator({ formData, isSignUp: isSignUP, setFormError });
 
-        if (isSignUP && !VALID_NAME_PATTERN.test(formData.name) ) {
-            setFormError((pre => ({
-                ...pre,
-                name: {
-                    error: true,
-                    errorMsg: "Please enter a valid name between 2 and 50 characters, using only letters, spaces, hyphens, or apostrophes."
-                }
-            })));
+        if (isSignUP) {
+            
+        } else {
 
-            return;
         }
-
-        if (!VALID_EMAIL_PATTERN.test(formData.email)) {
-            setFormError((pre => ({
-                ...pre,
-                email: {
-                    error: true,
-                    errorMsg: "Please enter a valid email."
-                }
-            })));
-
-            return;
-        }
-
-        if (isSignUP && !VALID_PASSWORD_PATTERN.test(formData.password)) {
-            setFormError((pre => ({
-                ...pre,
-                password: {
-                    error: true,
-                    errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
-                }
-            })));
-
-            return;
-        }
+        
     }
 
     return (
