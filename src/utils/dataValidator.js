@@ -1,7 +1,7 @@
 export function dataValidator({ formData, isSignUp, setFormError }) {
     const VALID_NAME_PATTERN = /^[a-zA-Z' -]{2,50}$/;
     const VALID_EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const VALID_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const VALID_PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
     if (isSignUp && !VALID_NAME_PATTERN.test(formData.name)) {
         setFormError((pre => ({

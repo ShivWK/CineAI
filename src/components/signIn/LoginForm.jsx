@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import EntryDiv from "./EntryDiv";
 import { dataValidator } from "../../utils/dataValidator";
+import signUpHandler from "../../utils/signUpHandler";
 
 const LoginForm = () => {
     const [isSmall, setSmall] = useState(false);
@@ -28,6 +29,25 @@ const LoginForm = () => {
             errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
         }
     })
+
+    useEffect(() => {
+        setFormError((pre => ({
+            name: {
+                error: false,
+                errorMsg: pre.name.errorMsg,
+            },
+
+            email: {
+                error: false,
+                errorMsg: pre.email.errorMsg,
+            },
+
+            password: {
+                error: false,
+                errorMsg: pre.password.errorMsg,
+            }
+        })))
+    }, [isSignUP])
 
     useEffect(() => {
         const resizeHandler = () => {
@@ -69,11 +89,10 @@ const LoginForm = () => {
         dataValidator({ formData, isSignUp: isSignUP, setFormError });
 
         if (isSignUP) {
-            
+            signUpHandler({ email: formData.email, password: formData.password })
         } else {
 
         }
-        
     }
 
     return (
@@ -84,12 +103,12 @@ const LoginForm = () => {
             <div className="flex flex-col gap-4.5">
 
                 {
-                    isSignUP && <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="name" placeholder="Name" isSmall={isSmall} type="text" errorMsg={formError.name.errorMsg} isError={formError.name.error} />
+                    isSignUP && <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="name" placeholder="Name" isSmall={isSmall} type="text" errorMsg={formError.name.errorMsg} isError={formError.name.error} isSignUp={isSignUP} />
                 }
 
-                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="email" placeholder="Email" isSmall={isSmall} type="text" errorMsg={formError.email.errorMsg} isError={formError.email.error} />
+                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="email" placeholder="Email" isSmall={isSmall} type="text" errorMsg={formError.email.errorMsg} isError={formError.email.error} isSignUp={isSignUP} />
 
-                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="password" placeholder="Password" isSmall={isSmall} type="password" errorMsg={formError.password.errorMsg} isError={formError.password.error} />
+                <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="password" placeholder="Password" isSmall={isSmall} type="password" errorMsg={formError.password.errorMsg} isError={formError.password.error} isSignUp={isSignUP} />
 
                 <button type="submit" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">
                     {isSignUP ? "Sign Up" : "Sign In"}

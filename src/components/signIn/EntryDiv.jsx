@@ -9,7 +9,8 @@ const EntryDiv = ({
     isSmall,
     type,
     errorMsg,
-    isError
+    isError,
+    isSignUp
 }) => {
     const [move, setMove] = useState(false);
     const [error, setError] = useState("");
@@ -23,6 +24,10 @@ const EntryDiv = ({
     useEffect(() => {
         if (!move && formData?.[name].length !== 0) setMove(true)
     }, [formData?.[name]])
+
+    useEffect(() => {
+        setError("");
+    }, [isSignUp])
 
     const divClickHandler = () => {
         if (move) return;
