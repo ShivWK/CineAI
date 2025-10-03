@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { CircleX } from "lucide-react";
+import { dataValidator } from "../../utils/dataValidator";
 
 const EntryDiv = ({
     formData,
@@ -10,7 +11,8 @@ const EntryDiv = ({
     type,
     errorMsg,
     isError,
-    isSignUp
+    isSignUp,
+    setFormError
 }) => {
     const [move, setMove] = useState(false);
     const [error, setError] = useState("");
@@ -27,6 +29,7 @@ const EntryDiv = ({
 
     useEffect(() => {
         setError("");
+        setMove(false);
     }, [isSignUp])
 
     const divClickHandler = () => {
@@ -39,12 +42,12 @@ const EntryDiv = ({
         setMove(true);
     }
 
-    const blurHandler = () => {
+    const blurHandler = (e) => {
         if (formData[name].length === 0) {
             setMove(false);
             setError(errorMsg);
         } else {
-
+            dataValidator({ formData, whichOne: e.target.name.toUpperCase(), setFormError, isSignUp  })
         }
     }
 
