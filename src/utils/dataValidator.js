@@ -9,11 +9,11 @@ export function dataValidator({ formData, isSignUp, setFormError, whichOne }) {
                 ...pre,
                 name: {
                     error: true,
-                    errorMsg: "Please enter a valid name between 2 and 50 characters, using only letters, spaces, hyphens, or apostrophes."
+                    errorMsg: "Name must be 2–50 letters and can include spaces, hyphens, or apostrophes."
                 }
             })));
 
-            return;
+            return false;
         }
     }
 
@@ -27,7 +27,7 @@ export function dataValidator({ formData, isSignUp, setFormError, whichOne }) {
                 }
             })));
 
-            return;
+            return false;
         }
     }
 
@@ -38,11 +38,11 @@ export function dataValidator({ formData, isSignUp, setFormError, whichOne }) {
                 ...pre,
                 password: {
                     error: true,
-                    errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
+                    errorMsg: "Password must be 8+ chars with upper, lower, number, and symbol."
                 }
             })));
 
-            return;
+            return false;
         }
     }
 }

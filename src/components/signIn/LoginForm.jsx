@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import EntryDiv from "./EntryDiv";
 import { dataValidator } from "../../utils/dataValidator";
 import signUpHandler from "../../utils/signUpHandler";
 import signInHandler from "../../utils/signInHandler";
+import DotBounceLoader from "../common/DotBounceLoader";
 
 const LoginForm = () => {
-    const [isSmall, setSmall] = useState(false);
-    const [isSignUP, setSignUp] = useState(false);
+    const dispatch = useDispatch();
+
+    const [ isSmall, setSmall ] = useState(false);
+    const [ isSignUP, setSignUp ] = useState(false);
+    const [ authLoading, setAuthLoading ] = useState(false);
+    const [ gAuthLoading, setGAuthLoading ] = useState(false);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -29,7 +35,7 @@ const LoginForm = () => {
             error: false,
             errorMsg: "Password must be at least 8 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols."
         }
-    })
+    });
 
     useEffect(() => {
         setFormError((pre => ({
@@ -54,7 +60,7 @@ const LoginForm = () => {
             email: "",
             password: "",
         })
-    }, [isSignUP])
+    }, [isSignUP]);
 
     useEffect(() => {
         const resizeHandler = () => {
@@ -69,7 +75,7 @@ const LoginForm = () => {
 
         window.addEventListener("resize", resizeHandler);
         return () => window.removeEventListener("resize", resizeHandler);
-    }, [])
+    }, []);
 
     const inputChangeHandler = (e) => {
         setFormData((prv) => {
@@ -92,12 +98,20 @@ const LoginForm = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        if (authLoading) return;
+        setAuthLoading(true);
 
-        dataValidator({ formData, isSignUp: isSignUP, setFormError, whichOne: "ALL" });
+        const result = dataValidator({ formData, isSignUp: isSignUP, setFormError, whichOne: "ALL" });
+
+        if (!result) {
+            setAuthLoading(false);
+            return;
+        };
+
         if (isSignUP) {
-            signUpHandler({ email: formData.email, password: formData.password })
+            signUpHandler({ email: formData.email, password: formData.password, dispatch, setAuthLoading })
         } else {
-            signInHandler({ email: formData.email, password: formData.password })
+            signInHandler({ email: formData.email, password: formData.password, dispatch, setAuthLoading })
         }
     }
 
@@ -116,13 +130,13 @@ const LoginForm = () => {
 
                 <EntryDiv inputChangeHandler={inputChangeHandler} formData={formData} name="password" placeholder="Password" isSmall={isSmall} type="password" errorMsg={formError.password.errorMsg} isError={formError.password.error} isSignUp={isSignUP} setFormError={setFormError} />
 
-                <button type="submit" onClick={(e) => e.stopPropagation()} className="w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)] ">
-                    {isSignUP ? "Sign Up" : "Sign In"}
+                <button type="submit" onClick={(e) => e.stopPropagation()} className={`flex items-center justify-center w-full bg-[rgb(229,9,20)] text-white font-semibold tracking-wide py-1.5 lg:py-2 rounded text-lg lg:text-xl ${ !authLoading && "active:scale-95" } transform transition-all duration-75 ease-linear cursor-pointer hover:bg-[rgb(202,3,13)]`}>
+                    {authLoading ? <DotBounceLoader /> : isSignUP ? "Sign Up" : "Sign In"}
                 </button>
 
                 <span className="font-bold tracking-wider text-gray-300 text-center">OR</span>
 
-                <button type="button" className="text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-1.5 lg:py-2 rounded text-lg lg:text-xl active:scale-95 transform transition-all duration-75 ease-linear cursor-pointer">Continue with Google</button>
+                <button type="button" className={`flex items-center justify-center text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-1.5 lg:py-2 rounded text-lg lg:text-xl ${ !gAuthLoading && "active:scale-95" } transform transition-all duration-75 ease-linear cursor-pointer`}>Continue with Google</button>
 
                 {
                     !isSignUP && <span onClick={handleForgotPasswordClick} className="text-white font-semibold text-center underline lg:text-lg cursor-pointer hover:text-gray-300 transition-all duration-100 ease-linear select-none">Forgot password?</span>

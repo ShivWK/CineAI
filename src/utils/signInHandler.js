@@ -1,7 +1,8 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseConfig";
+import { setToast } from "../features/loginSlice";
 
-async function signInHandler({ email, password }) {
+async function signInHandler({ email, password, dispatch, setAuthLoading}) {
     try {
         let userCredentials = await signInWithEmailAndPassword(auth, email, password);
         console.log(userCredentials)

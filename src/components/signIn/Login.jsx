@@ -1,5 +1,6 @@
 import Header from '../header/Header';
 import LoginForm from './LoginForm';
+import Toast from '../common/Toast';
 
 const Login = () => {
   return (
@@ -8,8 +9,9 @@ const Login = () => {
       <img className='absolute object-cover w-full h-full -z-50' src="https://assets.nflxext.com/ffe/siteui/vlv3/bebd95d0-65f9-41a9-9d12-4794db63653e/web/IN-en-20250922-TRIFECTA-perspective_5e75cfb4-3797-4f17-866b-181ff91a51dd_large.jpg" alt="background-image" />
 
       <LoginForm />
+      <Toast />
     </main>
   )
 }
 
-export default Login
+export default Login;
