@@ -11,7 +11,7 @@
         }
 
         100% {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
     }
 }
