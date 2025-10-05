@@ -10,7 +10,6 @@ const Header = ({ showSignIn = true }) => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      alert("User signed out");
     } catch (err) {
       console.log("error in signing out".err);
     }
