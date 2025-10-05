@@ -45,4 +45,6 @@ export function dataValidator({ formData, isSignUp, setFormError, whichOne }) {
             return false;
         }
     }
+
+    return true
 }

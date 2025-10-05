@@ -4,6 +4,9 @@ const initialState = {
     showToast: false,
     toastMessage: "",
     toastError: false,
+    userName: "",
+    userId: null,
+    token: null
 }
 
 const loginSlice = createSlice({
