@@ -136,7 +136,7 @@ const LoginForm = () => {
 
                 <span className="font-bold tracking-wider text-gray-300 text-center">OR</span>
 
-                <button type="button" className={`flex items-center justify-center text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-1.5 lg:py-2 rounded text-lg lg:text-xl ${ !gAuthLoading && "active:scale-95" } transform transition-all duration-75 ease-linear cursor-pointer`}>Continue with Google</button>
+                <button type="button" className={`flex items-center justify-center text-gary-300 font-semibold text-white tracking-wide w-full bg-white/20 hover:bg-white/10 py-1.5 lg:py-2 rounded text-lg lg:text-xl ${ !gAuthLoading && "active:scale-95" } transform transition-all duration-75 ease-linear cursor-pointer select-none`}>Continue with Google</button>
 
                 {
                     !isSignUP && <span onClick={handleForgotPasswordClick} className="text-white font-semibold text-center underline lg:text-lg cursor-pointer hover:text-gray-300 transition-all duration-100 ease-linear select-none">Forgot password?</span>

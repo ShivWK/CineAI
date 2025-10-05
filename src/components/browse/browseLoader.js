@@ -9,7 +9,7 @@ async function browseLoader() {
         return redirect("/login")
     }
     
-    return null
+    // return null
 }
 
 export default browseLoader;
