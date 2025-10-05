@@ -1,12 +1,15 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
+    isLoggedIn: false,
+    userName: "",
+    userEmail: "",
+    userId: null,
+    accessToken: null,
+    refreshToken: null,
     showToast: false,
     toastMessage: "",
     toastError: false,
-    userName: "",
-    userId: null,
-    token: null
 }
 
 const loginSlice = createSlice({
@@ -20,6 +23,20 @@ const loginSlice = createSlice({
             state.toastMessage = message;
             state.toastError = error;
         },
+
+        setAuthDetails: (state, action) => {
+            const { name, email, userId, accessT, refreshT, } = action.payload;
+
+            state.userName = name;
+            state.userEmail = email;
+            state.userId = userId;
+            state.accessToken = accessT;
+            state.refreshToken = refreshT;
+        },
+
+        setLoggedInStatus: (state, action) => {
+            state.isLoggedIn = action.payload;
+        }
     }
 });
 
@@ -34,7 +51,31 @@ export const selectToast = createSelector(
     (show, message, error) => ({ show, message, error })
 )
 
+export const selectUserDetails = createSelector(
+    [
+        state => state.login.userName,
+        state => state.login.userEmail,
+        state => state.login.userId,
+    ],
+    (name, email, id) => ({ name, email, id })
+)
+
+export const selectSessionTokens = createSelector(
+    [
+        state => state.login.accessToken,
+        state => state.login.refreshToken
+    ],
+    (accessToken, refreshToken) => ({
+        accessToken,
+        refreshToken
+    })
+)
+
+export const selectLoginStatus = state => state.login.isLoggedIn;
+
 export const {
     setToast,
     setAuthLoading,
+    setAuthDetails,
+    setLoggedInStatus
 } = loginSlice.actions;
